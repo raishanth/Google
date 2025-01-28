@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Minecraft Home Page</title>
+    <link rel="shortcut icon" type="image/x-icon" href="1.ico">
+    <style>
+        /* Base styling */
+        body {
+            background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        hr {
+            border: none;
+            height: 3px;
+            background: #ffdf2b;
+            margin: 20px 0;
+            box-shadow: 0 0 8px rgba(255, 223, 43, 0.8);
+        }
+
+        marquee {
+            font-size: 2rem;
+            color: #ffdf2b;
+            font-weight: bold;
+            text-shadow: 2px 2px #333;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            text-align: center;
+            margin: 20px;
+            text-shadow: 2px 2px #333;
+        }
+
+        .section {
+            margin: 30px 10%;
+            text-align: center;
+        }
+
+        /* Navigation styling */
+        nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 20px 0;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            border-bottom: 4px solid #ff6b6b;
+            flex-wrap: wrap;
+        }
+
+        .desktop-nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .desktop-nav a:hover {
+            background-color: #ff6b6b;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Three dots menu styling */
+        .menu-button {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 2rem;
+            color: #fff;
+            z-index: 1100;
+        }
+
+        .menu-button span {
+            display: block;
+            width: 30px;
+            height: 4px;
+            background: #fff;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        .menu-button.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Intro section */
+        .intro {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 20px auto;
+            width: 80%;
+            line-height: 1.8;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 0px;
+            background-color: #222;
+            color: #ccc;
+            font-size: 0.9rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                padding: 10px;
+            }
+
+            .intro {
+                font-size: 1.2rem;
+                width: 90%;
+            }
+        }
+
+        /* Download section */
+        .download-section {
+            margin: 30px 10%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-section a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .download-section a:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        /* Active menu style */
+        .active {
+            background-color: #ffd700;
+            color: #333;
+        }
+
+        /* Hover effects */
+        nav a:hover {
+            background-color: #ff6b6b;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Blinking animation */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        h1, h3 {
+            text-align: center;
+            text-shadow: 1px 1px #000;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin: 20px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+       /* Popup Styling */
+       .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            padding: 20px;
+            background-color: #3e3e3e;
+            border-radius: 20px;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .popup-content {
+            font-size: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: #ffdf2b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .intro {
+                font-size: 1.2rem;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <button class="close">&times;</button>
+            <p>Welcome to Free Minecraft Home Page!</p>
+        </div>
+    </div>
+
+    <hr>
+    <marquee direction="left" scrollamount="10" behavior="scroll" title="Developed by ISHANTH" onmouseover="this.stop()" onmouseout="this.start()" class="marquee">
+        Welcome to Free Minecraft Home Page !!
+    </marquee>
+    <hr>
+
+    <h3><center><div id="datetime">Loading...</div></center></h3>
+    <!-- Three dots menu -->
+    <div class="menu-button" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Mobile navigation -->
+    <nav id="menu">
+        <a class="active" href="Home.html">Home</a>
+        <a href="java.html">Java Edition</a>
+        <a href="pocket.html">Pocket Edition</a>
+        <a  href='IshanthAPP.html'>IshanthCalculator</a>
+        <a href="reset.html">Change Password</a>
+        <a href="http://ishanthweb.netlify.app/">Family Home Page</a>
+        <a href='Index.html'>LogOUT</a>
+    </nav>
+
+    <!-- Desktop navigation -->
+    <div class="desktop-nav">
+        <a class="active" href="Home.html">Home</a>
+        <a href="java.html">Java Edition</a>
+        <a href="pocket.html">Pocket Edition</a>
+        <a  href='IshanthAPP.html'>IshanthCalculator</a>
+        <a href="reset.html">Change Password</a>
+        <a href="http://ishanthweb.netlify.app/">Family Home Page</a>
+        <a href='Index.html'>LogOUT</a>
+    </div>
+    <h1>Download Minecraft Java and Pocket Edition for Free!</h1>
+
+
+    <div class="intro">
+        <p>
+            Explore the world of Minecraft, build incredible creations, and unleash your creativity! Enjoy free downloads of Minecraft Java Edition and Pocket Edition.
+        </p>
+    </div>
+    
+
+    <footer>
+        © 2024 Free Minecraft Home Page | All rights reserved.
+    </footer>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const menuButton = document.querySelector('.menu-button');
+
+        function toggleMenu() {
+            const isOpen = menu.style.display === 'flex';
+            menu.style.display = isOpen ? 'none' : 'flex';
+            menuButton.classList.toggle('active');
+        }
+
+        const colors = ['#2a5298', '#ffdf2b', '#ff6b6b'];
+
+        function updateDateTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+
+            const formattedDateTime = `Date: ${day}/${month}/${year} ${hours}:${minutes}:${seconds} ${ampm}`;
+            const datetimeElement = document.getElementById('datetime');
+            datetimeElement.textContent = formattedDateTime;
+
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            datetimeElement.style.color = randomColor;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>

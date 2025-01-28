@@ -1,0 +1,14 @@
+[build]
+  base = "/"
+  publish = "."
+  command = "echo 'No build command required for static site.'"
+
+[build.environment]
+apiKey: "AIzaSyAT55ng8cgaT-YrRU_g30-5QnIiaz9jIUA",
+authDomain: "test-sign-301c3.firebaseapp.com",
+databaseURL: "https://test-sign-301c3-default-rtdb.firebaseio.com",
+projectId: "test-sign-301c3",
+storageBucket: "test-sign-301c3.firebasestorage.app",
+messagingSenderId: "1068958086240",
+appId: "1:1068958086240:web:d764fa8af9e049ba76bf05",
+measurementId: "G-LWT5JCMNVV"
